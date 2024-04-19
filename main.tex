@@ -1,0 +1,46 @@
+\documentclass{beamer}
+
+\title{Lebesgue Integration}
+\author{Christian Soltermann}
+\date{\today}
+
+\begin{document}
+    \begin{frame}
+        \titlepage
+    \end{frame}
+\section{Review}
+\subsection{Riemann Definition}
+\begin{frame}{Quick Review of Riemann Integration}
+    \begin{definition}
+        A function $f: \mathbb{R} \rightarrow \mathbb{R}$ is \textbf{Riemann integrable} on an interval $[a,b]$ if \[
+            U(f) = L(f) 
+        \]
+        where $U$ and $L$ are defined as follows
+        \begin{gather*}
+            U(f) = \inf \{U(f,P) \mid \text{$P$ is a partition of $[a,b]$}\}\\
+            L(f) = \sup \{L(f,P) \mid \text{$P$ is a partition of $[a,b]$}\}\\
+            U(f,P) = \sum_{i=1}^{n} M_i \Delta x_i \quad M_i = \sup \{f(x) \mid x \in [x_{i-1}, x_i]\}\\
+            L(f,P) = \sum_{i=1}^{n} m_i \Delta x_i \quad m_i = \inf \{f(x) \mid x \in [x_{i-1}, x_i]\}
+        \end{gather*}
+    \end{definition}
+\end{frame}
+
+\begin{frame}{Example Riemann Integrable Function}
+    \centering
+    \includegraphics<1>[width=8cm]{squared0.png}%
+    \includegraphics<2>[width=8cm]{squared5.png}%
+    \includegraphics<3>[width=8cm]{squared10.png}%
+    \includegraphics<4>[width=8cm]{squared20.png}%
+    \includegraphics<5>[width=8cm]{squared40.png}%
+\end{frame}    
+
+\begin{frame}{Example Non-Riemann Integrable Function}
+    \centering
+    \includegraphics<1>[width=8cm]{dirichlet0.png}%
+    \includegraphics<2>[width=8cm]{dirichlet5.png}%
+    \includegraphics<3>[width=8cm]{dirichlet10.png}%
+    \includegraphics<4>[width=8cm]{dirichlet20.png}%
+    \includegraphics<5>[width=8cm]{dirichlet40.png}%
+\end{frame}
+
+\end{document}
