@@ -59,11 +59,12 @@
     by step functions.
 
 \end{frame}
-\begin{frame}{Indicator Functions}
+\begin{frame}{Indicator Functions and Simple Functions}
 
     \textbf{Lebesgue integration} captures a broader class of functions
     by defining integration not just on step functions, but on 
-    \textbf{indicator functions}. 
+    \textbf{simple functions}. Simple functions are linear combinations
+    of \textbf{indicator functions}, which are defined as 
 
     \[
         \chi_S(x) = \begin{cases}
@@ -72,7 +73,7 @@
         \end{cases}  
     \]
     
-    Defining an integral on all indicator functions will
+    Defining an integral on all simple functions will
     require the machinery of \textbf{measure theory}.
 \end{frame}
 
@@ -164,6 +165,114 @@ measurable.
 \end{frame}
 
 \begin{frame}{Measurable Functions}
-    
+    Recall that one characterization of continuous states that a function
+    $f$ is continuous if the preimage $f^{-1}(S)$ of open any open set $S$
+    is open.
+    \\~\\
+    Measurable functions can be defined in a similar fashion. A function $f$
+    is said to be measurable if the preimage of any set in $\mathcal{B}_\mathbb{R}$
+    is (Lebesgue) measurable.
+    \\~\\
+    Measurable functions are closed under the usual operations: addition,
+    subtraction, multiplication, and division. In addition, they are closed 
+    limit operations. So if a sequence of measurable functions converge, their
+    limit is also a measurable function.
+\end{frame}
+
+\begin{frame}{Defining the Lebesgue Integral}
+    For some simple function $\phi = \sum_{i=1}^{n} a_i \chi_{S_i}$ (where
+    $S_i$ are all disjoint), its \textbf{Lebesgue integral} is defined 
+    \[
+        \int_{\mathbb{R}}\phi\,d\mu := \sum_{i=1}^{n} a_i\mu(S_i).
+    \]
+    Then, for a non-negative Lebesgue measurable function $f_+$, the integral
+    is defined
+    \[
+        \int_{\mathbb{R}}f_+\,d\mu := \sup \left\{\int_{\mathbb{R}} \phi\,d\mu : \phi \leq f_+, f_+ \text{ is simple}\right\}.
+    \]
+\end{frame}
+
+\begin{frame}{The Full Lebesgue Integral (Finally)}
+    Finally, the integral of an arbitrary Lebesgue measurable function $f$ can be defined
+    by splitting the function into its positive and negative parts, $f = f_+ - f_-$ (the two
+    parts can be shown to be Lebesgue measurable).
+    \[
+        \int_{\mathbb{R}}f\,d\mu := \int_{\mathbb{R}}f_+\,d\mu - \int_{\mathbb{R}}f_-\,d\mu  
+    \]
+    If both the positive and negative integrals are finite, $f$ is said to be \textbf{Lebesgue integrable}.
+    Equivalently, a function is Lebesgue integrable if
+    \[
+        \int_{\mathbb{R}} |f|\,d\mu < \infty.  
+    \]
+\end{frame}
+
+\begin{frame}{Partitioning the Range}
+    Lebesgue integration works by approximating a function $f$ with simple
+    functions. A sequence of approximations can be created by partitioning
+    the range of $f$.
+    \\~\\
+    Given a partition of the range, $P = \{y_0, y_1, y_2, \ldots, y_n\}$,
+    let $E_k = f^{-1}((y_{k-1}, y_k])$. Then, 
+    \[
+      s(x) = \sum_{k=1}^{n} y_k \chi_{E_k}  
+    \]
+    is a simple function approximating $f$. A sequence of approximations
+    can be created using finer and finer partitions.
+\end{frame}
+
+% \begin{frame}{Example Lebesgue Integral}
+%     \centering
+%     \includegraphics<1>[width=8cm]{lsquared0.png}%
+%     \includegraphics<2>[width=8cm]{lsquared5.png}%
+%     \includegraphics<3>[width=8cm]{lsquared10.png}%
+%     \includegraphics<4>[width=8cm]{lsquared20.png}%
+%     \includegraphics<5>[width=8cm]{lsquared40.png}%
+% \end{frame}
+
+\begin{frame}{Properties of the Lebesgue Integral}
+    The Lebesgue integral is an extension of the Riemann integral,
+    meaning that any function that is Riemann integral is also
+    Lebesgue integral and the two integrals agree.
+    \\~\\
+    The Lebesgue integral also maintains all the nice properties
+    of the Riemann integral, such as linearity and the fundamental
+    theorem of calculus.
+    \\~\\
+    One difference between the Riemann and Lebesgue integrals is that 
+    the Lebesgue integral does not specify orientation. For the Riemann
+    integral, $\int_a^b f\,dx = -\int_b^a f\,dx$. For the Lebesgue
+    integral, $\int_{[a,b]} f\,d\mu$ has no concept of direction.  
+\end{frame}
+
+\begin{frame}{What's the Point?}
+    The Lebesgue integral not only captures a larger space of 
+    functions than the Riemann integral, but also defines
+    a nicer space. The Lebesgue integral, unlike the Riemann
+    integral, behaves well under limits.
+    \begin{theorem}[Monotone Convergence Theorem]
+        If $\{f_n : n \in \mathbb{N}\}$ is a monotone increasing sequence of positive,
+        measurable, extended real-values functions $f_n : X \rightarrow [0,\infty]$ and 
+        $f = \lim_{n\to\infty} f_n$, then
+        \[
+            \lim_{n\to\infty} \int f_n\, d\mu = \int f\,d\mu   
+        \]
+    \end{theorem}
+    Note that this theorem does not hold for Riemann integration.
+\end{frame}
+
+\begin{frame}{One Last Theorem}
+    \begin{theorem}[Dominated Convergence Theorem]
+        If $\{f_n\}$ is a sequence of measurable functions
+        $f_n : X \to \mathbb{R}$ such that $f_n \to f$ pointwise,
+        and $|f_n| \leq g$ where $g : X \to [0, \infty]$ is an 
+        integrable function, then
+        \[
+            \lim_{n\to\infty}\int f_n\,d\mu = \int f\,d\mu      
+        \]
+    \end{theorem}
+
+    These limit theorems are very powerful tools for all fields of mathematics
+    that deal with sequences of functions, especially probability theory and
+    Fourier analysis.
 \end{frame}
 \end{document}
