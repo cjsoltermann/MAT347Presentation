@@ -8,8 +8,7 @@
     \begin{frame}
         \titlepage
     \end{frame}
-\section{Review}
-\subsection{Riemann Definition}
+\section{Riemann Integration}
 \begin{frame}{Quick Review of Riemann Integration}
     \begin{definition}
         A function $f: \mathbb{R} \rightarrow \mathbb{R}$ is \textbf{Riemann integrable} on an interval $[a,b]$ if \[
@@ -43,4 +42,128 @@
     \includegraphics<5>[width=8cm]{dirichlet40.png}%
 \end{frame}
 
+\begin{frame}{A Closer Look}
+    Riemann integrability can be thought of as a function's ability
+    to be approximated by \textbf{step functions}. A step function
+    is a function that splits the domain into disjoint intervals
+    (a partition) and 
+    assigns a single value to each one.\\~\\
+    Given a partition $\{x_0, x_1, \ldots\}$ and a set of values $\{a_1, a_2, \ldots\}$,
+
+    \[
+        S(x) = a_i\quad\text{if $x \in [x_{i-1}, x_i]$}
+    \]
+
+    After defining an integral for step functions, you can
+    then extend the definition to any function that can be approximated
+    by step functions.
+
+\end{frame}
+\begin{frame}{Indicator Functions}
+
+    \textbf{Lebesgue integration} captures a broader class of functions
+    by defining integration not just on step functions, but on 
+    \textbf{indicator functions}. 
+
+    \[
+        \chi_S(x) = \begin{cases}
+            1\quad\text{if $x \in S$}\\
+            0\quad\text{otherwise}
+        \end{cases}  
+    \]
+    
+    Defining an integral on all indicator functions will
+    require the machinery of \textbf{measure theory}.
+\end{frame}
+
+\section{Measure Theory}
+
+\begin{frame}{$\sigma$-Algebras}
+    Given a non-empty set $X$, a \textbf{$\sigma$-algebra} on $X$ is a collection 
+    of subsets closed under complements and countable unions. \\~\\
+    For any metric space $X$, 
+    such as $\mathbb{R}$ with $d(x,y) = |x-y|$, the 
+    \textbf{Borel $\sigma$-algebra} is the smallest $\sigma$-algebra
+    that includes all open sets (and closed sets by complement) and is denoted $\mathcal{B}_X$.
+    \begin{example}
+        For the set $X = \{a,b,c,d\}$, $\Sigma = \{\emptyset, \{a,b\}, \{c,d\}, \{a,b,c,d\}\}$
+        is a $\sigma$-algebra. 
+    \end{example}
+\end{frame}
+
+\begin{frame}{Measures}
+
+    A measure is an function $\mu$ from a $\sigma$-algebra to 
+    the extended-real interval $[0,\infty]$ that satisfies some simple properties.
+    \begin{enumerate}[(i)]
+        \item $\mu(\emptyset) = 0$
+        \item For a countable collection of disjoint sets $\{S_i\}_{i \in I}$
+        \[\mu\left(\bigcup_{i\in I} S_i\right) = \sum_{i\in I} \mu(S_i)\]
+    \end{enumerate}
+
+    A subset with measure 0 is called a \textbf{null set}.
+    \\~\\
+    A space $X$, $\sigma$-algebra $\mathcal{M}$, and 
+    measure $\mu$ form a \textbf{measure space}
+    $(X, \mathcal{M}, \mu)$.
+
+\end{frame}
+
+\begin{frame}{The Lebesgue Measure}
+
+    Using $\mathbb{R}$ as a metric space and taking the Borel
+    $\sigma$-algebra $\mathcal{B}_\mathbb{R}$, a measure can
+    be defined
+    \[
+       m(S) := \inf\left\{\sum_{j=1}^{\infty}\left(b_j-a_j\right) : \bigcup_{j=1}^{\infty}(a_j,b_j] \supset S\right\} 
+    \] 
+    In words, the measure of an interval is defined to be its length. Then, an arbitrary set can
+    be covered by a collection of half-open intervals. The measure of an 
+    arbitrary set is defined as the infimum of the summed lengths of all possible collections.
+    \\~\\
+    After completion of $\mathcal{B}_\mathbb{R}$ and $m$
+    (a process that assigns measure zero to all subsets of null sets),
+    the completed $\sigma$-algebra $\mathcal{L}$ and measure $\mu$ define
+    the \textbf{Lebesgue measure}. 
+    \\~\\
+    "Measurable" is used to mean Lebesgue-measurable ($\in \mathcal{L}$).
+
+\end{frame}
+
+\begin{frame}{Example: Measure of $\mathbb{Q}$}
+Recall that $\mathcal{B}_\mathbb{R}$ includes all closed sets in $\mathbb{R}$ and that
+$\mathbb{Q}$ is a countable union of closed (singleton) sets.
+Therefore, $\mathbb{Q} \in \mathcal{B}_\mathbb{R} \subset \mathcal{L}$
+and so $\mathbb{Q}$ is Lebesgue measurable. 
+\\~\\
+Each point $x_n \in \mathbb{Q}$ can be placed in a half-interval of length 
+$\frac{\epsilon}{2^n}$. Then,
+\[
+    \mu(\mathbb{Q}) \leq \sum_{n=0}^{\infty} \frac{\epsilon}{2^n} = \epsilon
+\]
+Since $\epsilon$ is arbitrarily small, $\mu(\mathbb{Q}) = 0$. 
+\end{frame}
+
+\begin{frame}{Example: Non-Measurability of Vitali Sets}
+Recall the equivalence relation from the midterm, where 
+$x~y \iff x - y \in \mathbb{Q}$. This equivalence class
+breaks the real line into shifted copies of the rationals.
+A Vitali set $N$ includes one representative from each equivalence class within the interval
+$[0,1)$.
+\\~\\
+It can be shown that the interval $[0,1)$ is equal to a countable
+union of shifted copies of $N$, and so
+\[
+    1 = \mu([0,1)) = \sum_{0}^{\infty} m(N)
+\]
+\\~\\
+If $m(N) = 0$, then $1=0$. If $m(N) > 0$, then $1=\infty$.
+In either case, a contradiction. Therefore $N$ cannot be
+measurable.
+
+\end{frame}
+
+\begin{frame}{Measurable Functions}
+    
+\end{frame}
 \end{document}
